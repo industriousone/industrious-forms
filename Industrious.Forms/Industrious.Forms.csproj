@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<PackageId>Industrious.Forms</PackageId>
+	<Title>Industrious.Forms</Title>
+	<Authors>industriousone</Authors>
+	<Company>Industrious One</Company>
+	<Description>Make working with Xamarin.Forms just a little bit easier.</Description>
+	<Copyright>Copyright © Industrious One</Copyright>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<PackageTags>xamarin,forms,xamarinforms</PackageTags>
+	<PackageProjectUrl>https://github.com/industriousone/industrious-forms</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/industriousone/industrious-forms</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.425677" />
+  </ItemGroup>
+</Project>
