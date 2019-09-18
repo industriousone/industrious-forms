@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://opensource.org/licenses/MIT" target="_blank">
-        <img src="https://img.shields.io/github/license/industriousone/industrious-todo" alt="MIT" />
+        <img src="https://img.shields.io/github/license/industriousone/industrious-forms" alt="MIT" />
     </a>
     <a href="https://twitter.com/industrious" target="_blank">
         <img src="https://img.shields.io/twitter/follow/industrious.svg?style=social&label=Follow">
