@@ -34,9 +34,17 @@ Automatically set the input focus to a particular control when a condition becom
     <StackLayout>
         <Entry
             Text="{Binding Title}"
-            forms:AutoFocusBehavior.When="{Binding ShouldFocusTitle"} />
+            forms:AutoFocusBehavior.FocusWhen="{Binding ShouldFocusTitle}" />
     </StackLayout>
 </ContentView>
+```
+
+A constant can also be used to always set the input focus when the form is loaded.
+
+```xml
+<Entry
+	Text="{Binding Title}"
+	forms:AutoFocusBehavior.FocusWhen="True" />
 ```
 
 ### BooleanBindingExtension
