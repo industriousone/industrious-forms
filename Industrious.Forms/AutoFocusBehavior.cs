@@ -13,7 +13,7 @@ namespace Industrious.Forms
 	///  <code>
 	///   &lt;Entry
 	///       Text="{Binding Title}"
-	///       local:AutoFocusBehavior.When="{Binding ShouldFocusTitle}" /&gt;
+	///       local:AutoFocusBehavior.FocusWhen="{Binding ShouldFocusTitle}" /&gt;
 	///  </code>
 	/// </example>
 	/// <example>
@@ -22,35 +22,37 @@ namespace Industrious.Forms
 	///  <code>
 	///   &lt;Entry
 	///       Text="{Binding Title}"
-	///       local:AutoFocusBehavior.When="true" /&gt;
+	///       local:AutoFocusBehavior.FocusWhen="True" /&gt;
 	///  </code>
 	/// </example>
 	public class AutoFocusBehavior : Behavior<InputView>
 	{
-		public static readonly BindableProperty WhenProperty = BindableProperty.CreateAttached(
-			"When",
-			typeof(bool),
+		public static readonly BindableProperty FocusWhenProperty = BindableProperty.CreateAttached(
+			"FocusWhen",
+			typeof(Boolean),
 			typeof(AutoFocusBehavior),
 			false,
-			propertyChanged: OnWhenChanged);
+			propertyChanged: OnFocusWhenChanged);
 
 
 		public static Boolean GetFocusWhen(BindableObject bindable)
 		{
-			var value = (Boolean)bindable.GetValue(WhenProperty);
+			var value = (Boolean)bindable.GetValue(FocusWhenProperty);
 			return (value);
 		}
 
 		public static void SetFocusWhen(BindableObject bindable, Boolean value)
 		{
-			bindable.SetValue(WhenProperty, value);
+			bindable.SetValue(FocusWhenProperty, value);
 		}
 
 
-		private static void OnWhenChanged(BindableObject bindable, Object oldValue, Object newValue)
+		private static void OnFocusWhenChanged(BindableObject bindable, Object oldValue, Object newValue)
 		{
 			if ((Boolean)newValue)
+			{
 				_ = SetFocus((InputView)bindable);
+			}
 		}
 
 
