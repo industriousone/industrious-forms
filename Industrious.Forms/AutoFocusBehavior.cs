@@ -1,31 +1,31 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Industrious.Forms
 {
 	/// <summary>
-	///  Automatically set the input focus when a condition becomes true.
+	///  An <see cref="https://docs.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/behaviors/attached">
+	///  attached behavior</see> which automatically set the input focus to a view when the provided condition
+	///  becomes true.
 	/// </summary>
 	/// <example>
-	///  Sets the focus to attached <see cref="Entry"/> when the binding condition
-	///  resolves to <c>true</c>.
+	///  Sets the focus to attached <see cref="Entry"/> when the binding condition resolves to <c>true</c>.
 	///  <code>
 	///   &lt;Entry
 	///       Text="{Binding Title}"
-	///       local:AutoFocusBehavior.FocusWhen="{Binding ShouldFocusTitle}" /&gt;
+	///       forms:AutoFocusBehavior.FocusWhen="{Binding ShouldFocusTitle}" /&gt;
 	///  </code>
 	/// </example>
 	/// <example>
-	///  To set the focus automatically when the form is loaded, set <c>When</c>
-	///  to <c>true</c>.
+	///  To set the focus automatically when the form is loaded, set <c>When</c> to <c>true</c>.
 	///  <code>
 	///   &lt;Entry
 	///       Text="{Binding Title}"
-	///       local:AutoFocusBehavior.FocusWhen="True" /&gt;
+	///       forms:AutoFocusBehavior.FocusWhen="True" /&gt;
 	///  </code>
 	/// </example>
-	public class AutoFocusBehavior : Behavior<InputView>
+	public static class AutoFocusBehavior
 	{
 		public static readonly BindableProperty FocusWhenProperty = BindableProperty.CreateAttached(
 			"FocusWhen",
@@ -41,6 +41,7 @@ namespace Industrious.Forms
 			return (value);
 		}
 
+
 		public static void SetFocusWhen(BindableObject bindable, Boolean value)
 		{
 			bindable.SetValue(FocusWhenProperty, value);
@@ -51,15 +52,25 @@ namespace Industrious.Forms
 		{
 			if ((Boolean)newValue)
 			{
-				_ = SetFocus((InputView)bindable);
+				// if view is visible, set focus, else wait until it is
+				var view = (View)bindable;
+				if (view.Width >= 0)
+					view.Focus();
+				else
+					view.PropertyChanged += OnViewPropertyChanged;
 			}
 		}
 
 
-		private static async Task SetFocus(InputView bindable)
+		private static void OnViewPropertyChanged(Object sender, PropertyChangedEventArgs e)
 		{
-			await Task.Delay(1);  // control isn't ready to receive focus when first attached
-			bindable.Focus();
+			if (e.PropertyName == "Renderer")
+			{
+				// view is now visible enough, go ahead and set focus
+				var view = (View)sender;
+				view.PropertyChanged -= OnViewPropertyChanged;
+				view.Focus();
+			}
 		}
 	}
 }

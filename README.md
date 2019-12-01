@@ -22,7 +22,7 @@ See [Industrious.ToDo](https://github.com/industrious/industrious-todo) for usag
 
 ### AutoFocusBehavior
 
-Automatically set the input focus to a particular control when a condition becomes true.
+Automatically set the input focus to a particular view when a condition becomes true.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
